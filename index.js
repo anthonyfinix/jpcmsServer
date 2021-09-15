@@ -11,6 +11,9 @@ const init = async () => {
         app.use(express.json())
         app.use(authenticate)
         app.use(cors())
+        app.use('/',(req,res)=>{
+            res.send("Hold up")
+        })
         app.use('/user', user)
         app.use('/service', service)
         app.listen(3001, () => {
