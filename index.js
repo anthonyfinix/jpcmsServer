@@ -18,7 +18,7 @@ const init = async () => {
         app.use('/user', user)
         app.use('/service', service)
         app.listen(PORT, () => {
-            console.log('hello server')
+            console.log(`hello server ${PORT}`)
         })
     } catch (e) {
         console.log(e);
