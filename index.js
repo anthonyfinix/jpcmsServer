@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const service = require('./services');
 const user = require('./user')
 const authenticate = require('./middleware/authenticate');
+const path = require('path');
 const PORT = process.env.PORT || 3001
 const init = async () => {
     try {
@@ -12,7 +13,8 @@ const init = async () => {
         app.use(express.json())
         app.use(authenticate)
         app.use(cors())
-        app.get('/',(req,res)=>{
+        app.use(express.static(path.join(__dirname, "public")))
+        app.get('/', (req, res) => {
             res.send("Hold up")
         })
         app.use('/user', user)
