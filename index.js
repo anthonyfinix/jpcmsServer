@@ -4,7 +4,8 @@ const app = express();
 const mongoose = require('mongoose');
 const service = require('./services');
 const user = require('./user')
-const authenticate = require('./middleware/authenticate')
+const authenticate = require('./middleware/authenticate');
+const PORT = process.env.PORT || 3001
 const init = async () => {
     try {
         await mongoose.connect(encodeURI("mongodb+srv://anthonyfinix:anthonyfinix123@cluster0.e5vqq.mongodb.net/jptechsolution?retryWrites=true&w=majority"));
@@ -16,7 +17,7 @@ const init = async () => {
         })
         app.use('/user', user)
         app.use('/service', service)
-        app.listen(3001, () => {
+        app.listen(PORT, () => {
             console.log('hello server')
         })
     } catch (e) {
