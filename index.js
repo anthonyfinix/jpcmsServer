@@ -12,7 +12,7 @@ const init = async () => {
         app.use(express.json())
         app.use(authenticate)
         app.use(cors())
-        app.use('/',(req,res)=>{
+        app.get('/',(req,res)=>{
             res.send("Hold up")
         })
         app.use('/user', user)
