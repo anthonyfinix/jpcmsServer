@@ -6,6 +6,7 @@ const service = require('./services');
 const user = require('./user')
 const authenticate = require('./middleware/authenticate');
 const path = require('path');
+const loginGuard = require('./middleware/loginGuard');
 const PORT = process.env.PORT || 3001
 const init = async () => {
     try {
@@ -18,7 +19,7 @@ const init = async () => {
             res.send("Hold up")
         })
         app.use('/user', user)
-        app.use('/service', service)
+        app.use('/service', loginGuard, service)
         app.listen(PORT, () => {
             console.log(`hello server ${PORT}`)
         })
