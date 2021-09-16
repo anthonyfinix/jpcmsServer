@@ -11,7 +11,7 @@ router.get('/:id', async (req, res) => {
 })
 router.post('/', async (req, res) => {
     let service = { ...req.body }
-    let newService = new Service({ ...service });
+    let newService = new Service({ ...service, createdBy: req.user.username });
     try {
         let response = await newService.save();
         res.json(response)
@@ -21,7 +21,6 @@ router.post('/', async (req, res) => {
 })
 router.put('/', async (req, res) => {
     let newData = { ...req.body };
-    console.log(newData)
     delete newData.id
     try {
         let response = await Service.findOneAndUpdate({ _id: req.body.id }, newData);
