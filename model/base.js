@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
-exports.baseSchemaFields = {
+module.exports = {
     createdAt: { type: Date, required: true, default: new Date() }
 }
