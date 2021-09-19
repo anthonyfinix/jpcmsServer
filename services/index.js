@@ -1,7 +1,11 @@
 const router = require('express').Router();
+const pagination = require('../middleware/pagination');
 const Service = require('./model');
-router.get('/', async (req, res) => {
-    let result = await Service.find({});
+router.get('/', pagination, async (req, res) => {
+    let query = Service.find({ createdBy: req.user._id.toString() })
+    query.skip(req.query.skip)
+    query.limit(req.query.limit);
+    let result = await query.exec();
     res.json({ result })
 })
 router.get('/:id', async (req, res) => {
@@ -11,7 +15,7 @@ router.get('/:id', async (req, res) => {
 })
 router.post('/', async (req, res) => {
     let service = { ...req.body }
-    let newService = new Service({ ...service, createdBy: req.user.username });
+    let newService = new Service({ ...service, createdBy: req.user._id });
     try {
         let response = await newService.save();
         res.json(response)

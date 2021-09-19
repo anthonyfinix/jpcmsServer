@@ -14,6 +14,6 @@ const schema = new mongoose.Schema({
     returnedDate: { type: Date },
     detailedDescription: { type: String },
     createdBy: { type: mongoose.Schema.Types.ObjectId, required: true }
-});
+},{ versionKey: false });
 const Service = mongoose.model("Service", schema);
 module.exports = Service
