@@ -7,7 +7,7 @@ const user = require('./user')
 const authenticate = require('./middleware/authenticate');
 const path = require('path');
 const loginGuard = require('./middleware/loginGuard');
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 8080
 const init = async () => {
     try {
         await mongoose.connect(encodeURI("mongodb+srv://anthonyfinix:anthonyfinix123@cluster0.e5vqq.mongodb.net/jptechsolution?retryWrites=true&w=majority"));
@@ -27,10 +27,6 @@ const init = async () => {
         console.log(e);
     }
 }
-
-
-
-
 init()
 
 
