@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index",
+    "dev": "env-cmd nodemon index",
     "start": "node index"
   },
   "keywords": [],
@@ -18,5 +18,8 @@
     "mongoose": "^6.0.5",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
