@@ -22,10 +22,10 @@ router.post('/login', async (req, res) => {
     }
 })
 router.post('/register', async (req, res) => {
-    let reqUser = req.body;
+    let { firstName, lastName, username, password } = req.body;
     try {
-        let hashedPassword = bcrypt.hashSync(reqUser.password, 10);
-        let newUser = new User({ username: reqUser.username, password: hashedPassword });
+        let hashedPassword = bcrypt.hashSync(password, 10);
+        let newUser = new User({ firstName, lastName, username: username, password: hashedPassword });
         let response = await newUser.save();
         return res.json({ response });
     } catch (e) {
