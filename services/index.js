@@ -6,13 +6,21 @@ router.get('/', pagination, async (req, res) => {
     query.skip(req.query.skip)
     query.limit(req.query.limit);
     let result = await query.exec();
-    res.json({ result })
+    res.json({ result, page: req.page })
 })
+
+router.get('/search', async (req, res) => {
+    let query = req.query.q;
+    let response = await Service.find({ customerName: { $regex: new RegExp(`\w*${query}\w*`, 'i') } })
+    res.json({ result: response });
+})
+
 router.get('/:id', async (req, res) => {
     let id = req.params.id
     let result = await Service.findOne({ _id: id });
     res.json({ result })
 })
+
 router.post('/', async (req, res) => {
     let service = { ...req.body }
     let newService = new Service({ ...service, createdBy: req.user._id });
@@ -23,6 +31,7 @@ router.post('/', async (req, res) => {
         res.send(e)
     }
 })
+
 router.put('/', async (req, res) => {
     let newData = { ...req.body };
     delete newData.id
@@ -33,10 +42,12 @@ router.put('/', async (req, res) => {
         return res.json({ error: e })
     }
 })
+
 router.delete('/:id', async (req, res) => {
     let id = req.params.id;
     let response = await Service.findOneAndDelete({ _id: id })
     res.json(response)
 })
+
 
 module.exports = router;
