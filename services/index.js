@@ -5,13 +5,13 @@ router.get('/', pagination, async (req, res) => {
     let query = Service.find({ createdBy: req.user._id.toString() })
     query.skip(req.query.skip)
     query.limit(req.query.limit);
-    let result = await query.exec();
+    let result = await query.sort({ 'updatedAt': -1 }).exec();
     res.json({ result, page: req.page })
 })
 
 router.get('/search', async (req, res) => {
     let query = req.query.q;
-    let response = await Service.find({ customerName: { $regex: new RegExp(`\w*${query}\w*`, 'i') } })
+    let response = await Service.find({ customerName: { $regex: new RegExp(`\w*${query}\w*`, 'i') }, createdBy: req.user._id.toString() }).sort({ 'updatedAt': -1 });
     res.json({ result: response });
 })
 
