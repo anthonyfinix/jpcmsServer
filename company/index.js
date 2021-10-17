@@ -12,7 +12,7 @@ router.get('/', pagination, async (req, res) => {
 
 router.get('/search', async (req, res) => {
     let query = req.query.q;
-    let response = await Company.find({ customerName: { $regex: new RegExp(`\w*${query}\w*`, 'i') }, createdBy: req.user._id.toString() }).sort({ 'createdAt': -1 });
+    let response = await Company.find({ name: { $regex: new RegExp(`\w*${query}\w*`, 'i') }, createdBy: req.user._id.toString() }).sort({ 'createdAt': -1 });
     res.json({ result: response });
 })
 
