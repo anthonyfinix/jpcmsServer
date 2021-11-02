@@ -4,7 +4,7 @@ const app = express();
 const authenticate = require('./middleware/authenticate');
 const path = require('path');
 const config = require('./config');
-const handleSeed = require('./middleware/handleSeed');
+const handleSeed = require('./db/handleSeed');
 const getMainDb = require('./db/getMainDb');
 const apiV1 = require('./apiV1/');
 
