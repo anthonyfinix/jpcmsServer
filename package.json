@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "env-cmd nodemon index",
-    "start": "node index"
+    "start": "node index",
+    "seed:job": "node ./seeders/job/seeder.js",
+    "seed:user": "node ./seeders/user/seeder.js"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +15,13 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5",
     "node-sass": "^6.0.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "url-parse": "^1.5.3"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0"

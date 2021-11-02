@@ -9,4 +9,7 @@ const schema = new mongoose.Schema({
     profile: { type: String },
 }, { versionKey: false });
 const User = mongoose.model("User", schema);
-module.exports = User
+module.exports = {
+    User,
+    userSchema:schema
+}

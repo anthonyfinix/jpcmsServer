@@ -1,4 +1,4 @@
-const User = require('../user/modal');
+const { User } = require('../user/modal');
 
 const jwt = require('jsonwebtoken');
 const authenticate = async (req, _, next) => {
@@ -6,7 +6,7 @@ const authenticate = async (req, _, next) => {
     if (token) {
         try {
             let payload = jwt.verify(token.split(' ')[1], 'secret');
-            let user = await User.findOne({ username: payload.username });
+            let user = await global.mainDb.models.User.findOne({ username: payload.username });
             if (user) req.user = user;
         } catch (e) {
             console.log(e);
